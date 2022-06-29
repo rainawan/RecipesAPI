@@ -87,6 +87,7 @@ function App() {
 
     console.log("get api data", SearchBar)
 
+
     //give the input to api
     //get the api data
     //display the data

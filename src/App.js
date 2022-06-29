@@ -11,13 +11,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import './App.css';
-import CharacterCard from './CharacterCard';
+import RecipeCard from './RecipeCard';
 import characters from './protagonists.json'
 import { useEffect, useState } from 'react';
 import { findDOMNode } from 'react-dom';
 import { display } from '@mui/system';
-
-
+import { MenuItem } from '@mui/material';
 
 
 var requestOptions = {
@@ -43,7 +42,7 @@ function App() {
 
   const [ SearchBar, setSearchBar ] = useState('');
   const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${SearchBar}`)
-  const [ menu, setMenu ] = useState('');
+  const [ menu, setMenu ] = useState(null);
   const [ searchResult, setSearchResult ] = useState(null);
   const [ menuData, setMenuData ] = useState([]);
 
@@ -53,7 +52,7 @@ function App() {
       //before fetch
       const MENU_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${SearchBar}`
       const response = await fetch (`${MENU_URL}`, requestOptions);
-      console.log("before response", response);
+      // console.log("before response", response);
       const data = await response.json();
       console.log("display menu", data);
       setMenu(data.meals);
@@ -177,20 +176,41 @@ function App() {
           justifyContent="center"
           alignItems="flex-start"
         >
-          {characters.map((data) =>
-          <Grid
-          item
-          xs={12}
-          md={4}
-          >
-          <CharacterCard
-            characterName={data.strMeal}
-            image={data.strMealThumb}
-            descriptionArray={data.description}
-          />
-        </Grid>
-        )}
-        </Grid>
+          {/* {characters.map((data, key) => {
+            return (
+              <Grid
+              item
+              key={key}
+              xs={12}
+              md={4}
+              >
+              <RecipeCard
+                characterName={data.strMeal}
+                pic={data.strMealThumb}
+                // descriptionArray={data.description}
+              />
+            </Grid>
+          ))} */}
+
+          {menu && menu.map((data, key)=> {
+            console.log("before return", data.strMeal, data.strMealThumb)
+              return (
+                <Grid
+                item
+                key={key}
+                xs={12}
+                md={4}
+                >
+                <RecipeCard
+                characterName={data.strMeal}
+                pic={data.strMealThumb}
+                >
+                </RecipeCard>
+                </Grid>
+              )
+          })}
+        </Grid> 
+        
 
 
 

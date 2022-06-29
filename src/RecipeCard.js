@@ -7,14 +7,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function CharacterCard(props) {
+export default function RecipeCard(props) {
+  console.log("picture", props.pic)
   // console.log("props", props)
   return (
     <Card>
       <CardMedia
         component="img"
         height="350px"
-        image={props.strMealThumb}
+        image={props.pic}
       />
       <CardHeader
         title={props.strMeal}
@@ -23,11 +24,11 @@ export default function CharacterCard(props) {
       />
       <CardContent sx={{ pt: 0 }}>
         <ul>
-          {props.descriptionArray.map((sentence) => 
+          {/* {props.descriptionArray.map((sentence) => 
           <Typography component="li">
             {sentence}
           </Typography>
-          )} 
+          )}  */}
         </ul>
       </CardContent>
       <CardActions>
@@ -39,11 +40,16 @@ export default function CharacterCard(props) {
           <a href="#" class="recipe-btn">View Recipe</a>
         </Button>
       </CardActions>
+
+
     </Card>
+
+
+
   );
 }
 
-<div class = "meal-card">
+{/* <div class = "meal-card">
     <img class = "meal-img" src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Onion_on_White.JPG/1200px-Onion_on_White.JPG" alt = "food"></img>
     <div class = "meal-content">
       <p>DESCRIPTION YADHKJFKLADJ;F</p>
@@ -52,4 +58,4 @@ export default function CharacterCard(props) {
     <div class="meal-info">
       <a href="#" class="recipe-btn">View Recipe</a>
     </div>
-  </div>
+</div> */}

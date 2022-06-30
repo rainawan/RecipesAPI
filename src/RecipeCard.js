@@ -6,9 +6,33 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useEffect, useState } from 'react';
+
 
 export default function RecipeCard(props) {
   // console.log("picture", props.pic)
+  console.log("meal id", props.mealInfo)
+
+  const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772`)
+  const [ searchResult, setSearchResult ] = useState(null);
+
+
+  const ViewRecipe = async ()=>{
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    try {
+      const response = await fetch (`${menu_url}`, requestOptions);
+      const data = await response.json(); //2s
+      console.log("view recipe please", data)
+      setSearchResult(data)
+    } catch (e) {
+      console.log("my error from searchIng", e)
+    }
+  }
+
+
   return (
     <Card>
       <CardMedia
@@ -21,46 +45,54 @@ export default function RecipeCard(props) {
         titleTypographyProps={{ align: 'center' }}
         sx={{ mt: 1 }}
       />
+
       <CardContent sx={{ pt: 0 }}>
-        <ul>
-          {/* {props.descriptionArray.map((sentence) => 
-          <Typography component="li">
-            {sentence}
-          </Typography>
-          )}  */}
-        </ul>
+        info={props.mealInfo}
       </CardContent>
+
+
       <CardActions>
         <Button 
           variant="contained"
           sx={{ px: 6, mx: 'auto' }}
         >
-          View
-          <a href="#" class="recipe-btn">View Recipe</a>
+          View Recipe
+          <button onClick={ViewRecipe} 
+            type = "submit" 
+          >
+            recipe pls im begging
+          </button>
+          {/* <a href="#" class="recipe-btn">View Recipe</a> */}
         </Button>
 
-        {/* <button onClick={searchIng} 
+
+        {/* <Typography
+          justifyContent="center"
+          alignItems="flex-start"
+          color="red"
+          variant="contained"
+          sx={{ px: 47, mx: 'auto' }}
+          >
+          <input 
+                value={SearchBar} 
+                onChange={(inputTag)=>{setSearchBar(inputTag.target.value)}}
+                type = "text" 
+                class = "search-content"
+                placeholder = "Enter ingredient" 
+                id = "search-input">
+          </input>
+          <button onClick={searchIng} 
             type = "submit" 
             class = "search-btn btn" 
             id = "search-btn">
-            <i class = "fas fa-search"></i>
+            <i class = "fa fa-search"></i>
+            Search
           </button>
+        </Typography> */}
 
-          <Button
-            variant = "contained"
-            sx={{ px: 6, mx: 'auto' }}
-          >
-            View
-          </Button> */}
-
-
+          
       </CardActions>
-
-
     </Card>
-
-
-
   );
 }
 

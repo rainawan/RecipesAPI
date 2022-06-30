@@ -18,13 +18,10 @@ import { findDOMNode } from 'react-dom';
 import { display } from '@mui/system';
 import { makeStyles, MenuItem } from '@mui/material';
 
-
-
 var requestOptions = {
   method: 'GET',
   redirect: 'follow'
 };
-
 
 function App() {
 
@@ -65,7 +62,6 @@ function App() {
       const response = await fetch (`${menu_url}`, requestOptions);
       const data = await response.json(); //2s
       setSearchResult(data)
-    
     } catch (e) {
       console.log("my error from searchIng", e)
     }
@@ -93,8 +89,6 @@ function App() {
   //   }
   // }
 
-  console.log("recipe link" )
-
   return (
     <div className="App">
       <CssBaseline />
@@ -102,31 +96,11 @@ function App() {
       {/* {console.log(menu)}
       {Object.values (menu).map((menu) => <p>{menu.name}</p>)} */}
 
-    {/* <section class = "recipes">
-      <div class="meal-search-box">
-          <input 
-              value={SearchBar} 
-              onChange={(inputTag)=>{setSearchBar(inputTag.target.value)}}
-              type = "text" 
-              class = "search-content"
-              placeholder = "Enter ingredient" 
-              id = "search-input">
-          </input>
-          <button onClick={searchIng} 
-            type = "submit" 
-            class = "search-btn btn" 
-            id = "search-btn">
-            <i class = "fas fa-search"></i>
-          </button>
-      </div>
-    </section> */}
-
-
       <AppBar
         position="static"
         color="default"
         elevation={0}
-        sx={{ borderBottom: '1px solid lightgray' }}
+        sx={{ borderBottom: '5px solid black' }}
       >
       </AppBar>
 
@@ -135,6 +109,7 @@ function App() {
           variant="h2"
           align="center"
           color="text.primary"
+          borderColor={'2px solid black'}
           sx={{ px: 45}}
         >
           GRUB
@@ -148,19 +123,19 @@ function App() {
           sx={{ px: 47, mx: 'auto' }}
           >
           <input 
-                value={SearchBar} 
-                onChange={(inputTag)=>{setSearchBar(inputTag.target.value)}}
-                type = "text" 
-                class = "search-content"
-                placeholder = "Enter ingredient" 
-                id = "search-input">
+              value={SearchBar} 
+              onChange={(inputTag)=>{setSearchBar(inputTag.target.value)}}
+              type = "text" 
+              class = "search-content"
+              placeholder = "Enter ingredient" 
+              id = "search-input">
           </input>
           <button onClick={searchIng} 
-            type = "submit" 
-            class = "search-btn btn" 
-            id = "search-btn">
-            <i class = "fa fa-search"></i>
-            Search
+              type = "submit" 
+              class = "search-btn btn" 
+              id = "search-btn">
+              <i class = "fa fa-search"></i>
+              Search
           </button>
         </Typography>
 
@@ -182,7 +157,7 @@ function App() {
           alignItems="flex-start"
         >
           {menu && menu.map((data, key)=> {
-            console.log("before return", data.strMeal, data.strMealThumb)
+            console.log("before return", data.strMeal, data.strMealThumb, data.idMeal)
               return (
                 <Grid
                 item
@@ -193,6 +168,7 @@ function App() {
                 <RecipeCard
                 mealName={data.strMeal}
                 mealImg={data.strMealThumb}
+                mealInfo={data.idMeal}
                 >
                 </RecipeCard>
                 </Grid>

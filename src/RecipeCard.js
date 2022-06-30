@@ -47,7 +47,7 @@ export default function RecipeCard(props) {
       />
 
       <CardContent sx={{ pt: 0 }}>
-        info={props.mealInfo}
+
       </CardContent>
 
 

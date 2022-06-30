@@ -111,17 +111,23 @@ function App() {
           color="text.primary"
           style={{margin: "30px 0 0 0 0"}}
           borderColor={'2px solid black'}
-          sx={{ px: 45}}
+          // sx={{ px: 45}}
+          style = {{fontFamily: 'Titan One'}}
+          color="#663300"
+          fontSize={130}
         >
           GRUB
+          
         </Typography>
 
         <Typography
           justifyContent="center"
           alignItems="flex-start"
-          color="red"
+          align="center"
           variant="contained"
-          sx={{ px: 47, mx: 'auto' }}
+          sx={{ px: 43, mx: 'auto' }}
+          style = {{fontFamily: 'Poppins'}}
+          
           >
           <input 
               value={SearchBar} 
@@ -161,7 +167,7 @@ function App() {
           alignItems="flex-start"
         >
           {menu && menu.map((data, key)=> {
-            console.log("before return", data.strMeal, data.strMealThumb, data.idMeal)
+            console.log("before return", data.strMeal, data.strMealThumb, data.idMeal, data.strSource)
               return (
                 <Grid
                 item

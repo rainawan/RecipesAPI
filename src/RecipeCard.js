@@ -25,7 +25,8 @@ export default function RecipeCard(props) {
     try {
       const response = await fetch (`${menu_url}`, requestOptions);
       const data = await response.json(); //2s
-      console.log("view recipe please", data)
+      // console.log("view recipe please", data)
+      console.log("view recipe!!!!", data)
       setSearchResult(data)
     } catch (e) {
       console.log("my error from searchIng", e)
@@ -50,18 +51,24 @@ export default function RecipeCard(props) {
     
       </CardContent>
 
+      {/* href={props.mealLink} */}
 
-      <CardActions>
-            <Button href={props.mealLink}
+      <CardActions
+      url={props.mealLink}
+      >
+        
+            <Button onClick = {ViewRecipe} 
               variant="contained"
+              type="submit"
               sx={{ px: 6, mx: 'auto' }}
             >
               View Recipe
-              <button onClick={ViewRecipe} 
+              {/* <button onClick={ViewRecipe} 
                 type = "submit" 
               >
                 recipe pls im begging
-              </button>
+              </button> */}
+
               {/* <a href="#" class="recipe-btn">View Recipe</a> */}
             </Button>
       </CardActions>

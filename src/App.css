@@ -10,8 +10,7 @@ body {
   url("https://img.freepik.com/free-vector/cute-food-pattern-design-yellow-background_8830-484.jpg?w=900&t=st=1656560229~exp=1656560829~hmac=7cea5bd2b78268c8ac2ce4809109a7559af3b3185030cd8873ffaec55cc363cd");
   background-position: center;
 	/* background-size: cover; */
-	
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;

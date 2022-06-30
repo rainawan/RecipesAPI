@@ -109,6 +109,7 @@ function App() {
           variant="h2"
           align="center"
           color="text.primary"
+          style={{margin: "30px 0 0 0 0"}}
           borderColor={'2px solid black'}
           sx={{ px: 45}}
         >
@@ -137,6 +138,9 @@ function App() {
               <i class = "fa fa-search"></i>
               Search
           </button>
+          {/* style = {{font-family: 'Poppins', sans-serif;}} */}
+
+
         </Typography>
 
         <Typography 
@@ -169,6 +173,7 @@ function App() {
                 mealName={data.strMeal}
                 mealImg={data.strMealThumb}
                 mealInfo={data.idMeal}
+                mealLink={data.strSource}
                 >
                 </RecipeCard>
                 </Grid>

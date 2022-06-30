@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 
 export default function RecipeCard(props) {
   // console.log("picture", props.pic)
-  console.log("meal id", props.mealInfo)
+  // console.log("meal id", props.mealInfo)
 
   const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${props.mealInfo}`)
   const [ searchResult, setSearchResult ] = useState(null);
@@ -47,50 +47,23 @@ export default function RecipeCard(props) {
       />
 
       <CardContent sx={{ pt: 0 }}>
-
+    
       </CardContent>
 
 
       <CardActions>
-        <Button 
-          variant="contained"
-          sx={{ px: 6, mx: 'auto' }}
-        >
-          View Recipe
-          <button onClick={ViewRecipe} 
-            type = "submit" 
-          >
-            recipe pls im begging
-          </button>
-          {/* <a href="#" class="recipe-btn">View Recipe</a> */}
-        </Button>
-
-
-        {/* <Typography
-          justifyContent="center"
-          alignItems="flex-start"
-          color="red"
-          variant="contained"
-          sx={{ px: 47, mx: 'auto' }}
-          >
-          <input 
-                value={SearchBar} 
-                onChange={(inputTag)=>{setSearchBar(inputTag.target.value)}}
-                type = "text" 
-                class = "search-content"
-                placeholder = "Enter ingredient" 
-                id = "search-input">
-          </input>
-          <button onClick={searchIng} 
-            type = "submit" 
-            class = "search-btn btn" 
-            id = "search-btn">
-            <i class = "fa fa-search"></i>
-            Search
-          </button>
-        </Typography> */}
-
-          
+            <Button href={props.mealLink}
+              variant="contained"
+              sx={{ px: 6, mx: 'auto' }}
+            >
+              View Recipe
+              <button onClick={ViewRecipe} 
+                type = "submit" 
+              >
+                recipe pls im begging
+              </button>
+              {/* <a href="#" class="recipe-btn">View Recipe</a> */}
+            </Button>
       </CardActions>
     </Card>
   );
@@ -106,3 +79,4 @@ export default function RecipeCard(props) {
       <a href="#" class="recipe-btn">View Recipe</a>
     </div>
 </div> */}
+

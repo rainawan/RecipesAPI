@@ -13,7 +13,7 @@ export default function RecipeCard(props) {
   // console.log("picture", props.pic)
   console.log("meal id", props.mealInfo)
 
-  const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772`)
+  const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${props.mealInfo}`)
   const [ searchResult, setSearchResult ] = useState(null);
 
 

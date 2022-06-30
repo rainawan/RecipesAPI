@@ -15,8 +15,14 @@ export default function RecipeCard(props) {
 
   const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${props.mealInfo}`)
   const [ searchResult, setSearchResult ] = useState(null);
+  
+  const [recipe_url, setrecipe_url] = useState(null)
 
-
+  useEffect(() => {
+    ViewRecipe();
+  }, [])
+  
+  
   const ViewRecipe = async ()=>{
     var requestOptions = {
       method: 'GET',
@@ -25,14 +31,13 @@ export default function RecipeCard(props) {
     try {
       const response = await fetch (`${menu_url}`, requestOptions);
       const data = await response.json(); //2s
-      // console.log("view recipe please", data)
-      console.log("view recipe!!!!", data)
+      console.log("view recipe please", data.meals[0].strSource)
+      setrecipe_url(data.meals[0].strSource)
       setSearchResult(data)
     } catch (e) {
       console.log("my error from searchIng", e)
     }
   }
-
 
   return (
     <Card>
@@ -54,36 +59,22 @@ export default function RecipeCard(props) {
       {/* href={props.mealLink} */}
 
       <CardActions
-      url={props.mealLink}
+      
+      
       >
-        
-            <Button onClick = {ViewRecipe} 
+
+        {/* <a href={recipe_url}>view recipe</a> */}
+
+            <Button href={recipe_url}
               variant="contained"
               type="submit"
               sx={{ px: 6, mx: 'auto' }}
             >
               View Recipe
-              {/* <button onClick={ViewRecipe} 
-                type = "submit" 
-              >
-                recipe pls im begging
-              </button> */}
-
-              {/* <a href="#" class="recipe-btn">View Recipe</a> */}
             </Button>
+
+
       </CardActions>
     </Card>
   );
 }
-
-{/* <div class = "meal-card">
-    <img class = "meal-img" src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Onion_on_White.JPG/1200px-Onion_on_White.JPG" alt = "food"></img>
-    <div class = "meal-content">
-      <p>DESCRIPTION YADHKJFKLADJ;F</p>
-      <p>words</p>
-    </div>
-    <div class="meal-info">
-      <a href="#" class="recipe-btn">View Recipe</a>
-    </div>
-</div> */}
-

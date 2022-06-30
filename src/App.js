@@ -167,7 +167,7 @@ function App() {
           alignItems="flex-start"
         >
           {menu && menu.map((data, key)=> {
-            console.log("before return", data.strMeal, data.strMealThumb, data.idMeal, data.strSource)
+            console.log("before return",data )
               return (
                 <Grid
                 item

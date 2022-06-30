@@ -8,17 +8,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function RecipeCard(props) {
-  console.log("picture", props.pic)
-  // console.log("props", props)
+  // console.log("picture", props.pic)
   return (
     <Card>
       <CardMedia
         component="img"
         height="350px"
-        image={props.pic}
+        image={props.mealImg}
       />
       <CardHeader
-        title={props.strMeal}
+        title={props.mealName}
         titleTypographyProps={{ align: 'center' }}
         sx={{ mt: 1 }}
       />
@@ -39,6 +38,22 @@ export default function RecipeCard(props) {
           View
           <a href="#" class="recipe-btn">View Recipe</a>
         </Button>
+
+        {/* <button onClick={searchIng} 
+            type = "submit" 
+            class = "search-btn btn" 
+            id = "search-btn">
+            <i class = "fas fa-search"></i>
+          </button>
+
+          <Button
+            variant = "contained"
+            sx={{ px: 6, mx: 'auto' }}
+          >
+            View
+          </Button> */}
+
+
       </CardActions>
 
 

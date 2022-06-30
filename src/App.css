@@ -117,6 +117,8 @@ body {
 
 button {
   background-color:rgb(154, 214, 239);
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 4px;
   color: #fff;

@@ -52,14 +52,13 @@ export default function RecipeCard(props) {
         sx={{ mt: 1 }}
       />
 
-      <CardContent sx={{ pt: 0 }}>
+      {/* <CardContent sx={{ pt: 0 }}>
     
-      </CardContent>
+      </CardContent> */}
 
       {/* href={props.mealLink} */}
 
       <CardActions
-      
       
       >
 
@@ -72,7 +71,6 @@ export default function RecipeCard(props) {
             >
               View Recipe
             </Button>
-
 
       </CardActions>
     </Card>

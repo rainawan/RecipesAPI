@@ -109,8 +109,6 @@ function App() {
           variant="h2"
           align="center"
           color="text.primary"
-          style={{margin: "30px 0 0 0 0"}}
-          borderColor={'2px solid black'}
           // sx={{ px: 45}}
           style = {{fontFamily: 'Titan One'}}
           color="#663300"
@@ -127,7 +125,7 @@ function App() {
           variant="contained"
           sx={{ px: 43, mx: 'auto' }}
           style = {{fontFamily: 'Poppins'}}
-          
+
           >
           <input 
               value={SearchBar} 
@@ -153,9 +151,9 @@ function App() {
           variant="h5" 
           align="center" 
           color="text.secondary"
-          sx={{ mx: 10 }}
+          sx={{ mx: 10, fontWeight: 'bold', fontSize: 30}}
         >
-          wordswordswords
+          ---SPICE UP YOUR MEALS---
         </Typography>
       </Container>
       {/* End hero unit */}

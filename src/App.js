@@ -33,7 +33,7 @@ function App() {
   // const [ viewRecipe, setViewRecipe ] = useState([]);
 
 
-  const displayMenu = async () => {
+  const fetchDishes = async () => {
     try {
       //before fetch
       const MENU_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${SearchBar}`
@@ -47,11 +47,11 @@ function App() {
   }
 
   useEffect(() => {
-    displayMenu();
+    fetchDishes();
   }, [searchResult])
   //doesn't iterate until searchResult changes
 
-  const searchIng = async ()=>{
+  const searchIng = async () =>{
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'
@@ -74,27 +74,9 @@ function App() {
     //display the data
   }
 
-  // const viewRecipe = async() => {
-  //   var requestOptions = {
-  //     method: 'GET',
-  //     redirect: 'follow'
-  //   };
-  //   try {
-  //     const response = await fetch (`${menu_url}`, requestOptions);
-  //     const data = await response.json(); //2s
-  //     setSearchResult(data)
-    
-  //   } catch (e) {
-  //     console.log("my error from searchIng", e)
-  //   }
-  // }
-
   return (
     <div className="App">
       <CssBaseline />
-
-      {/* {console.log(menu)}
-      {Object.values (menu).map((menu) => <p>{menu.name}</p>)} */}
 
       <AppBar
         position="static"
@@ -135,7 +117,7 @@ function App() {
               placeholder = "Enter ingredient" 
               id = "search-input">
           </input>
-          <button onClick={searchIng} 
+          <button onClick={() => searchIng()} 
               type = "submit" 
               class = "search-btn btn" 
               id = "search-btn">

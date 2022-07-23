@@ -24,9 +24,12 @@ var requestOptions = {
 };
 
 function App() {
+  // 1) Display Default Recipes
+  // 2) Search Ingredient
+  // 3) Display Ingredient Recipes
 
-  const [ SearchBar, setSearchBar ] = useState('');
-  const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${SearchBar}`)
+  const [ searchQuery, setSearchQuery ] = useState('');
+  const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQuery}`)
   const [ menu, setMenu ] = useState(null);
   const [ searchResult, setSearchResult ] = useState(null);
   const [ menuData, setMenuData ] = useState([]);
@@ -36,8 +39,8 @@ function App() {
   const fetchDishes = async () => {
     try {
       //before fetch
-      const MENU_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${SearchBar}`
-      const response = await fetch (`${MENU_URL}`, requestOptions);
+      const MENU_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQuery}`
+      const response = await fetch(`${MENU_URL}`, requestOptions);
       const data = await response.json();
       console.log("display menu", data);
       setMenu(data.meals);
@@ -67,7 +70,7 @@ function App() {
     }
     //useState can be accessed everywhere in component
 
-    console.log("get api data", SearchBar)
+    console.log("get api data", searchQuery)
 
     //give the input to api
     //get the api data
@@ -110,8 +113,8 @@ function App() {
 
           >
           <input 
-              value={SearchBar} 
-              onChange={(inputTag)=>{setSearchBar(inputTag.target.value)}}
+              value={searchQuery} 
+              onChange={(inputTag)=>{setSearchQuery(inputTag.target.value)}}
               type = "text" 
               class = "search-content"
               placeholder = "Enter ingredient" 

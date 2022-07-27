@@ -16,7 +16,7 @@ import characters from './protagonists.json'
 import { useEffect, useState } from 'react';
 import { findDOMNode } from 'react-dom';
 import { display } from '@mui/system';
-import { makeStyles, MenuItem } from '@mui/material';
+import { makeStyles, MenuItem, responsiveFontSizes } from '@mui/material';
 
 var requestOptions = {
   method: 'GET',
@@ -24,59 +24,121 @@ var requestOptions = {
 };
 
 function App() {
+
+  // 2 endpoints, meals ids by search query, meal info by id
+  // 1) get dishes ids and images
+  // 2) for each dish id, call the api to get the info for the specific dish
+
+
   // 1) Display Default Recipes
   // 2) Search Ingredient
   // 3) Display Ingredient Recipes
 
   const [ searchQuery, setSearchQuery ] = useState('');
-  const [ menu_url, setMenu_url ] = useState(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQuery}`)
-  const [ menu, setMenu ] = useState(null);
-  const [ searchResult, setSearchResult ] = useState(null);
-  const [ menuData, setMenuData ] = useState([]);
-  // const [ viewRecipe, setViewRecipe ] = useState([]);
+  const [ meals, setMeals ] = useState([]);
 
+  // console.log(meals);
+
+
+  const searchMealsByQuery = () => `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQuery}`;
+  
+  const searchMealById = (mealId) => `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
 
   const fetchDishes = async () => {
     try {
       //before fetch
-      const MENU_URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQuery}`
-      const response = await fetch(`${MENU_URL}`, requestOptions);
+      const menuUrl = searchMealsByQuery();
+      const response = await fetch(`${menuUrl}`, requestOptions);
       const data = await response.json();
-      console.log("display menu", data);
-      setMenu(data.meals);
+      const mealsData = data.meals.slice(0, 20);
+
+      console.log(mealsData)
+      // Goal: Fetch data for each meal
+
+
+      // get the promises
+
+      const meals = []
+      for (const {idMeal, strMeal, strMealThumb} of mealsData) {
+
+        // build one meal object
+        // console.log(idMeal, strMeal, strMealThumb);
+        const mealUrl = searchMealById(idMeal);
+        // console.log(url)
+
+        const response = await fetch(mealUrl);
+        const data = await response.json();
+        const recipeUrl = data.meals[0].strSource;
+
+        const meal = {
+          name: strMeal,
+          image: strMealThumb,
+          recipeUrl: recipeUrl
+        }
+
+        meals.push(meal)
+
+
+        // const data = await mealPromise.json();
+        
+
+
+
+        // What url do you want to fetch from
+        // request from the url
+        // get response
+        // get data from response
+        // console.log(response);
+        // const data = await response.json();
+        // console.log(data);
+
+        // const name = searchMealsByQuery(strMeal);
+
+      }
+
+      setMeals(meals);
+
+
+      // const meals = await Promise.all(mealPromises);
+
+      // for (const response of meals) {
+        
+      // }
+
+      // const recipeUrl = data.meals[0].strSource;
+
+
+      // Use the promises
+      /*
+      name
+      image
+      recipeUrl
+      */
+
+
+
+      // console.log("display menu", mealData);
+
+
+
+
+      // setMeals(mealData.meals);
     } catch (e) {
       console.log("my error", e)
     }
   }
 
   useEffect(() => {
-    fetchDishes();
-  }, [searchResult])
+    fetchDishes();  
+  }, [])
+
+  // const handleSubmit = () => {
+  //   fetchDishes();
+  // };
   //doesn't iterate until searchResult changes
 
-  const searchIng = async () =>{
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
 
-    //start fetch with Ingredients
-    try {
-      const response = await fetch (`${menu_url}`, requestOptions);
-      const data = await response.json(); //2s
-      setSearchResult(data)
-    } catch (e) {
-      console.log("my error from searchIng", e)
-    }
-    //useState can be accessed everywhere in component
-
-    console.log("get api data", searchQuery)
-
-    //give the input to api
-    //get the api data
-    //display the data
-  }
-
+ 
   return (
     <div className="App">
       <CssBaseline />
@@ -120,7 +182,8 @@ function App() {
               placeholder = "Enter ingredient" 
               id = "search-input">
           </input>
-          <button onClick={() => searchIng()} 
+          {/* <button onClick={() => fetchIngredients()}  */}
+          <button onClick={() => fetchDishes()} 
               type = "submit" 
               class = "search-btn btn" 
               id = "search-btn">
@@ -149,8 +212,8 @@ function App() {
           justifyContent="center"
           alignItems="flex-start"
         >
-          {menu && menu.map((data, key)=> {
-            console.log("before return",data )
+          {meals && meals.map((meal, key)=> {
+            // console.log("before return",data )
               return (
                 <Grid
                 item
@@ -159,10 +222,11 @@ function App() {
                 md={4}
                 >
                 <RecipeCard
-                mealName={data.strMeal}
-                mealImg={data.strMealThumb}
-                mealInfo={data.idMeal}
-                mealLink={data.strSource}
+                // props are static (constant within the component); name, img, link
+                // state is dynamic (within the component); seachQuer
+                mealName={meal.name}
+                mealImg={meal.image}
+                mealLink={meal.recipeUrl}
                 >
                 </RecipeCard>
                 </Grid>
